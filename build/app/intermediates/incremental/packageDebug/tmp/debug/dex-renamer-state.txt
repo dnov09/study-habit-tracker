@@ -1,0 +1,4 @@
+#Sun Jul 19 23:45:33 CDT 2020
+base.0=/home/dnov/Desktop/CS 487/study-habit-tracker/build/app/intermediates/dex/debug/mergeDexDebug/out/classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
