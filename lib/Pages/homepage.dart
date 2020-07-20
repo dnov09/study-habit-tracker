@@ -18,22 +18,39 @@ class _HomePageState extends State<HomePage> {
           TextSpan(
             children: <TextSpan>[
               TextSpan(
-                text: 'Task',
-                style: TextStyle(fontFamily: 'Roboto', color: Colors.black),
-              ),
+                  text: 'Task',
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontFamily: 'Roboto',
+                    color: Colors.black,
+                  )),
               TextSpan(
                 text: 'It',
                 style: TextStyle(
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700,
-                    color: Colors.cyan),
+                  fontSize: 24,
+                  fontFamily: 'Roboto',
+                  fontWeight: FontWeight.w700,
+                  color: Colors.cyan,
+                ),
               ),
             ],
           ),
         ),
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(
+              Icons.check_box,
+            ),
+            color: Colors.black,
+            onPressed: () {},
+          )
+        ],
       ),
       floatingActionButton: FloatingActionButton(
-        child: Icon(MyIcons.add),
+        child: Icon(
+          MyIcons.add,
+          size: 24,
+        ),
         onPressed: () {},
       ),
       body: SingleChildScrollView(
