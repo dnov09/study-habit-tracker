@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:study_habits/Pages/homepage.dart';
+
+import 'Pages/homepage.dart';
 
 void main() {
   runApp(MyApp());

@@ -92,3 +92,14 @@ flutter:
           weight: 300
         - asset: fonts/OpenSans-Regular.ttf
           weight: 400
+
+    - family: Nunito
+      fonts:
+        - asset: fonts/Nunito-Bold.ttf
+          weight: 700
+        - asset: fonts/Nunito-ExtraBold.ttf
+          weight: 800
+        - asset: fonts/Nunito-Light.ttf
+          weight: 300
+        - asset: fonts/Nunito-Regular.ttf
+          weight: 400
