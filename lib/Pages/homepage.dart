@@ -110,29 +110,27 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
-            Container(
-              child: Row(
-                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                children: [
-                  IconButton(
-                      icon: (_taskComplete2)
-                          ? Icon(MyIcons.ok_squared)
-                          : Icon(MyIcons.check_empty),
-                      onPressed: () {
-                        setState(() {
-                          _taskComplete2 = !_taskComplete2;
-                        });
-                      }),
-                  Text(
-                    'Study for software engineering',
-                    style: MyStyle.taskText.copyWith(
-                      fontSize: 15,
-                      decoration:
-                          (_taskComplete2) ? TextDecoration.lineThrough : null,
-                    ),
-                  )
-                ],
-              ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                    icon: (_taskComplete2)
+                        ? Icon(MyIcons.ok_squared)
+                        : Icon(MyIcons.check_empty),
+                    onPressed: () {
+                      setState(() {
+                        _taskComplete2 = !_taskComplete2;
+                      });
+                    }),
+                Text(
+                  'Study for software engineering',
+                  style: MyStyle.taskText.copyWith(
+                    fontSize: 15,
+                    decoration:
+                        (_taskComplete2) ? TextDecoration.lineThrough : null,
+                  ),
+                )
+              ],
             ),
             Row(
               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
