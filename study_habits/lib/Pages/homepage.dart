@@ -8,6 +8,16 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.white,
+        centerTitle: true,
+        elevation: 2.0,
+        title: Text(
+          'TaskIt',
+          style: TextStyle(color: Colors.black),
+        ),
+      ),
+    );
   }
 }
