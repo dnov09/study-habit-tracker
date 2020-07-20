@@ -10,6 +10,8 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   bool _taskComplete = false;
+  bool _taskComplete2 = false;
+  bool _taskComplete3 = false;
 
   List<String> tasks = [
     'Read Attack on titan for class',
@@ -89,7 +91,6 @@ class _HomePageState extends State<HomePage> {
             Row(
               // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                for (var task in tasks) {},
                 IconButton(
                     icon: (_taskComplete)
                         ? Icon(MyIcons.ok_squared)
@@ -109,9 +110,79 @@ class _HomePageState extends State<HomePage> {
                 )
               ],
             ),
+            Container(
+              child: Row(
+                // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  IconButton(
+                      icon: (_taskComplete2)
+                          ? Icon(MyIcons.ok_squared)
+                          : Icon(MyIcons.check_empty),
+                      onPressed: () {
+                        setState(() {
+                          _taskComplete2 = !_taskComplete2;
+                        });
+                      }),
+                  Text(
+                    'Study for software engineering',
+                    style: MyStyle.taskText.copyWith(
+                      fontSize: 15,
+                      decoration:
+                          (_taskComplete2) ? TextDecoration.lineThrough : null,
+                    ),
+                  )
+                ],
+              ),
+            ),
+            Row(
+              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                IconButton(
+                    icon: (_taskComplete3)
+                        ? Icon(MyIcons.ok_squared)
+                        : Icon(MyIcons.check_empty),
+                    onPressed: () {
+                      setState(() {
+                        _taskComplete3 = !_taskComplete3;
+                      });
+                    }),
+                Text(
+                  'Start designing task up',
+                  style: MyStyle.taskText.copyWith(
+                    fontSize: 15,
+                    decoration:
+                        (_taskComplete3) ? TextDecoration.lineThrough : null,
+                  ),
+                )
+              ],
+            ),
           ],
         ),
       ),
+    );
+  }
+
+  Widget generateTask(String taskText) {
+    return Row(
+      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      children: [
+        IconButton(
+            icon: (_taskComplete3)
+                ? Icon(MyIcons.ok_squared)
+                : Icon(MyIcons.check_empty),
+            onPressed: () {
+              setState(() {
+                _taskComplete3 = !_taskComplete3;
+              });
+            }),
+        Text(
+          taskText,
+          style: MyStyle.taskText.copyWith(
+            fontSize: 15,
+            decoration: (_taskComplete3) ? TextDecoration.lineThrough : null,
+          ),
+        )
+      ],
     );
   }
 }
