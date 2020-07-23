@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:study_habits/constants/style.dart';
-
+import 'package:study_habits/Pages/taskcreator.dart';
 import '../constants/my_icons_icons.dart';
 
 class HomePage extends StatefulWidget {
@@ -9,18 +9,25 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  bool _taskComplete = false;
-  bool _taskComplete2 = false;
-  bool _taskComplete3 = false;
 
-  List<String> tasks = [
+
+  List<String> taskList = [
     'Read Attack on titan for class',
     'Start Designing TaskIt',
     'Study for systems midterm'
   ];
 
+
+  List<bool> values = [];
+
+
+
   @override
   Widget build(BuildContext context) {
+    for (int i = 0; i < taskList.length;i++)
+      {
+        values.add(false);
+      }
     return Scaffold(
       appBar: AppBar(
         leading: Icon(
@@ -66,121 +73,47 @@ class _HomePageState extends State<HomePage> {
       floatingActionButton: FloatingActionButton(
         child: Icon(
           MyIcons.add,
-          size: 24,
+          size: 26,
         ),
-        backgroundColor: Colors.cyan,
-        onPressed: () {},
+        backgroundColor: Colors.green,
+        onPressed: () {
+          Navigator.push(
+            context,
+            MaterialPageRoute(builder: (context) => TaskCreatorPage()),
+          );
+        },
       ),
-      body: SingleChildScrollView(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(top: 24, left: 16.0, bottom: 16),
-              child: Text(
-                'Today',
-                style: TextStyle(
-                  fontFamily: 'Nunito',
-                  fontWeight: FontWeight.w700,
-                  fontSize: 24,
-                  color: Colors.cyan,
-                ),
-              ),
-            ),
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                    icon: (_taskComplete)
-                        ? Icon(MyIcons.ok_squared)
-                        : Icon(MyIcons.check_empty),
-                    onPressed: () {
-                      setState(() {
-                        _taskComplete = !_taskComplete;
-                      });
-                    }),
-                Text(
-                  'Read attack on titan',
-                  style: MyStyle.taskText.copyWith(
-                    fontSize: 15,
-                    decoration:
-                        (_taskComplete) ? TextDecoration.lineThrough : null,
-                  ),
-                )
-              ],
-            ),
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                    icon: (_taskComplete2)
-                        ? Icon(MyIcons.ok_squared)
-                        : Icon(MyIcons.check_empty),
-                    onPressed: () {
-                      setState(() {
-                        _taskComplete2 = !_taskComplete2;
-                      });
-                    }),
-                Text(
-                  'Study for software engineering',
-                  style: MyStyle.taskText.copyWith(
-                    fontSize: 15,
-                    decoration:
-                        (_taskComplete2) ? TextDecoration.lineThrough : null,
-                  ),
-                )
-              ],
-            ),
-            Row(
-              // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                IconButton(
-                    icon: (_taskComplete3)
-                        ? Icon(MyIcons.ok_squared)
-                        : Icon(MyIcons.check_empty),
-                    onPressed: () {
-                      setState(() {
-                        _taskComplete3 = !_taskComplete3;
-                      });
-                    }),
-                Text(
-                  'Start designing task up',
-                  style: MyStyle.taskText.copyWith(
-                    fontSize: 15,
-                    decoration:
-                        (_taskComplete3) ? TextDecoration.lineThrough : null,
-                  ),
-                )
-              ],
-            ),
-          ],
-        ),
-      ),
+      body: _buildList()
     );
   }
 
-  Widget generateTask(String taskText) {
-    return Row(
-      // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-      children: [
-        IconButton(
-            icon: (_taskComplete3)
-                ? Icon(MyIcons.ok_squared)
-                : Icon(MyIcons.check_empty),
-            onPressed: () {
-              setState(() {
-                _taskComplete3 = !_taskComplete3;
-              });
-            }),
-        Text(
-          taskText,
-          style: MyStyle.taskText.copyWith(
-            fontSize: 15,
-            decoration: (_taskComplete3) ? TextDecoration.lineThrough : null,
-          ),
-        )
-      ],
-    );
-  }
+
+
+  Widget _buildList() {
+    return new ListView.builder(
+      padding: const EdgeInsets.all(16.0),
+      itemCount: taskList.length,
+      itemBuilder: (context, key) { return new
+        CheckboxListTile(
+            title: Text(taskList[key], style: TextStyle(fontSize: 18.0)),
+            value: values[key],
+            onChanged: (bool newValue) {
+            setState(() {
+            values[key] = newValue;
+            });
+            }); //On changed
+
+    });
+  } //widget build list
+
+
+
+
+
 }
+
+
+
+
+
+
