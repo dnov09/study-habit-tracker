@@ -20,7 +20,7 @@ class _HomePageState extends State<HomePage> {
 
   List<bool> values = [];
 
-
+  Task result;
 
   @override
   Widget build(BuildContext context) {
@@ -77,10 +77,7 @@ class _HomePageState extends State<HomePage> {
         ),
         backgroundColor: Colors.green,
         onPressed: () {
-          Navigator.push(
-            context,
-            MaterialPageRoute(builder: (context) => TaskCreatorPage()),
-          );
+          awaitReturnTaskFromCreator(context);
         },
       ),
       body: _buildList()
@@ -100,6 +97,11 @@ class _HomePageState extends State<HomePage> {
             onChanged: (bool newValue) {
             setState(() {
             values[key] = newValue;
+            if (newValue)
+              {
+                taskList.removeAt(key);
+                values.removeAt(key);
+              }
             });
             }); //On changed
 
@@ -107,6 +109,20 @@ class _HomePageState extends State<HomePage> {
   } //widget build list
 
 
+  void awaitReturnTaskFromCreator(BuildContext context) async {
+
+    // start taskcreator and wait for the task to be saved
+    final Task resultGotten = await Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => TaskCreatorPage(),
+        ));
+
+    // add to this list
+    setState(() {
+      taskList.add(resultGotten.title);
+    });
+  }
 
 
 

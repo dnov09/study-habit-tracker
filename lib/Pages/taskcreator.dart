@@ -18,12 +18,13 @@ class Task {
     this.title = title;
     this.description = description;
   }
+
 }
 
 class _TaskCreatorPageState extends State<TaskCreatorPage> {
 
-  final nameCtrl= TextEditingController();
-  final descCtrl = TextEditingController();
+  final TextEditingController nameCtrl= TextEditingController();
+  final TextEditingController descCtrl = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
@@ -69,84 +70,75 @@ class _TaskCreatorPageState extends State<TaskCreatorPage> {
           )
         ],
       ),
-      body: SingleChildScrollView(
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-        Padding(
-        padding: const EdgeInsets.only(top: 24, left: 16.0, bottom: 16),
-        child: Text(
-          'Create New Task',
-          style: TextStyle(
-            fontFamily: 'Nunito',
-            fontWeight: FontWeight.w700,
-            fontSize: 24,
-            color: Colors.green,
-          ),
-        ),
-      ),
-      TextFormField(
-        controller: nameCtrl,
-          style: TextStyle(
-            fontSize: 18
-          ),
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.symmetric(vertical: 20),
-              labelText: 'Enter Task Name',
-          )
-      ),
-       TextFormField(
-         controller: descCtrl,
-          style: TextStyle(
-            fontSize: 18
-          ),
-          decoration: InputDecoration(
-              border: InputBorder.none,
-              contentPadding: EdgeInsets.symmetric(vertical: 60),
-              labelText: 'Enter Task Description',
-          )
-      ),
-    FlatButton(
-      color: Colors.blue,
-      textColor: Colors.white,
-      disabledColor: Colors.grey,
-      disabledTextColor: Colors.black,
-      padding: EdgeInsets.all(8.0),
-      splashColor: Colors.blueAccent,
-      onPressed: () {
-            },
-            child: Text(
-              "Save Task",
-              style: TextStyle(fontSize: 20.0),
-            ),
-          )
-    ]),
+      body: taskBody()
 
-      ),
+      );
 
-    );
   }
 
-  Widget createTask()
+  Widget createTask(String label, TextEditingController ctrl)
   {
-    return Row(
-
-      children: [
-
-        TextField(
-          decoration: InputDecoration(
-          border: InputBorder.none,
-          hintText: ''
-          ),
+    return new TextFormField(
+        controller: ctrl,
+        style: TextStyle(
+            fontSize: 18
+        ),
+        decoration: InputDecoration(
+        enabledBorder: OutlineInputBorder(
+          borderSide: const BorderSide(color: Colors.green, width:2.0),
+          borderRadius: BorderRadius.circular(20.0)
+        ),
+        contentPadding: EdgeInsets.symmetric(vertical: 35),
+        labelText: label,
         )
+    );
 
-
-      ],
-
-
-    ); //Row
   }
+
+  Widget taskBody()
+  {
+    return new Align(
+      alignment: Alignment.center,
+      child: Column(
+          children: <Widget>[
+            Padding(
+              padding: const EdgeInsets.only(top: 1, left: 16.0, bottom: 0),
+              child: Text(
+                'Create New Task',
+                style: TextStyle(
+                  fontFamily: 'Nunito',
+                  fontWeight: FontWeight.w700,
+                  fontSize: 24,
+                  color: Colors.green,
+                ),
+              ),
+            ),
+            createTask("Enter Task Name", nameCtrl),
+            createTask("Enter Task Description", descCtrl),
+            FlatButton(
+              color: Colors.green,
+              textColor: Colors.white,
+              disabledColor: Colors.grey,
+              disabledTextColor: Colors.black,
+              padding: EdgeInsets.all(8.0),
+              splashColor: Colors.blueAccent,
+              onPressed: () {
+                Task newTask = new Task(nameCtrl.text, descCtrl.text);
+                sendSavedTask(context, newTask);
+              },
+              child: Text(
+                "Save Task",
+                style: TextStyle(fontSize: 20.0),
+              ),
+            )
+          ])
+    );
+
+  }
+
+  void sendSavedTask(BuildContext context, taskToSend) {
+    Navigator.pop(context, taskToSend);
+  }
+
 
 }
