@@ -10,16 +10,17 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
 
+  //default starting list
 
-  List<String> taskList = [
-    'Read Attack on titan for class',
-    'Start Designing TaskIt',
-    'Study for systems midterm'
+  List<Task> taskList = [
+    new Task("Start designing TaskIt", "Working on some code", DateTime.now().add(new Duration(days:3)))
   ];
 
-
+  //checklist values, when true the items disappear from list
   List<bool> values = [];
 
+
+  //task send from task creator
   Task result;
 
   @override
@@ -92,15 +93,15 @@ class _HomePageState extends State<HomePage> {
       itemCount: taskList.length,
       itemBuilder: (context, key) { return new
         CheckboxListTile(
-            title: Text(taskList[key], style: TextStyle(fontSize: 18.0)),
+            title: Text(taskList[key].title, style: TextStyle(fontSize: 18.0)),
             value: values[key],
             onChanged: (bool newValue) {
             setState(() {
             values[key] = newValue;
             if (newValue)
               {
-                taskList.removeAt(key);
-                values.removeAt(key);
+               // taskList.removeAt(key);
+               // values.removeAt(key);
               }
             });
             }); //On changed
@@ -120,7 +121,7 @@ class _HomePageState extends State<HomePage> {
 
     // add to this list
     setState(() {
-      taskList.add(resultGotten.title);
+      taskList.add(resultGotten);
     });
   }
 
