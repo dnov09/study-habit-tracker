@@ -9,6 +9,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  String email = '';
+  String password = '';
+  String error = '';
+  // final _emailKey = GlobalKey<FormState>();
+  // final _passwordKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     final logo = Hero(
@@ -37,10 +43,17 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    final email = TextFormField(
+    final emailField = TextFormField(
+      // key: _emailKey,
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
-      initialValue: 'test@test.com',
+      // initialValue: 'test@test.com',
+      validator: (val) => val.isEmpty ? 'Enter an email' : null,
+      onChanged: (val) {
+        setState(() {
+          email = val;
+        });
+      },
       decoration: InputDecoration(
         hintText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -48,10 +61,19 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    final password = TextFormField(
+    final passwordField = TextFormField(
+      // key: _passwordKey,
       autofocus: false,
-      initialValue: 'admin',
+      // initialValue: 'admin123',
+
       obscureText: true,
+      validator: (val) =>
+          val != 'admin123' ? 'Password does not match email' : null,
+      onChanged: (val) {
+        setState(() {
+          password = val;
+        });
+      },
       decoration: InputDecoration(
         hintText: 'Password',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -66,11 +88,25 @@ class _LoginPageState extends State<LoginPage> {
           borderRadius: BorderRadius.circular(24),
         ),
         onPressed: () {
-          Navigator.of(context).pushNamed(HomePage.route);
+          if (password == 'admin123' && email == 'test@test.com') {
+            Navigator.of(context).pushNamed(HomePage.route);
+          } else {
+            setState(() {
+              error = 'Please enter valid credentials';
+            });
+          }
         },
         padding: EdgeInsets.all(12),
         color: Colors.cyan,
         child: Text('Log In', style: TextStyle(color: Colors.white)),
+      ),
+    );
+
+    final errorLabel = Text(
+      error,
+      style: TextStyle(
+        color: Colors.red,
+        fontSize: 14,
       ),
     );
 
@@ -84,9 +120,9 @@ class _LoginPageState extends State<LoginPage> {
 
     final signUpLabel = FlatButton(
       child: Text(
-        'New to TaskIt? Sign Up!',
+        'New to TaskIt? Create an account!',
         style: TextStyle(
-          color: Colors.black54,
+          color: Colors.black87,
           decoration: TextDecoration.underline,
         ),
       ),
@@ -104,11 +140,12 @@ class _LoginPageState extends State<LoginPage> {
           children: <Widget>[
             logo,
             SizedBox(height: 48.0),
-            email,
+            emailField,
             SizedBox(height: 8.0),
-            password,
+            passwordField,
             SizedBox(height: 24.0),
             loginButton,
+            errorLabel,
             signUpLabel,
             forgotLabel
           ],

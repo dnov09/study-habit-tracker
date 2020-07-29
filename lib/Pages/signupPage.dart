@@ -42,6 +42,7 @@ class _SignUpPageState extends State<SignUpPage> {
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
       initialValue: 'test@test.com',
+      validator: (val) => val.isEmpty ? 'Enter an email' : null,
       decoration: InputDecoration(
         hintText: 'Email',
         contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
@@ -51,7 +52,9 @@ class _SignUpPageState extends State<SignUpPage> {
 
     final password = TextFormField(
       autofocus: false,
-      initialValue: 'admin',
+      initialValue: 'admin123',
+      validator: (val) =>
+          val.length < 6 ? 'Enter a password 6+ chars long' : null,
       obscureText: true,
       decoration: InputDecoration(
         hintText: 'Password',
@@ -61,7 +64,7 @@ class _SignUpPageState extends State<SignUpPage> {
     );
     final reEnterPassword = TextFormField(
       autofocus: false,
-      initialValue: 'admin',
+      initialValue: 'admin123',
       obscureText: true,
       decoration: InputDecoration(
         hintText: 'Re-enter Password',
