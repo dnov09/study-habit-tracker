@@ -9,6 +9,14 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  String email = '';
+  String password = '';
+  String password2 = '';
+  String error = '';
+  final _formKey = GlobalKey<FormState>();
+  bool _hidePassword = true;
+  bool _hidePassword2 = true;
+
   @override
   Widget build(BuildContext context) {
     final logo = Hero(
@@ -38,62 +46,7 @@ class _SignUpPageState extends State<SignUpPage> {
       ),
     );
 
-    final email = TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      autofocus: false,
-      initialValue: 'test@test.com',
-      validator: (val) => val.isEmpty ? 'Enter an email' : null,
-      decoration: InputDecoration(
-        hintText: 'Email',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-    );
-
-    final password = TextFormField(
-      autofocus: false,
-      initialValue: 'admin123',
-      validator: (val) =>
-          val.length < 6 ? 'Enter a password 6+ chars long' : null,
-      obscureText: true,
-      decoration: InputDecoration(
-        hintText: 'Password',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-    );
-    final reEnterPassword = TextFormField(
-      autofocus: false,
-      initialValue: 'admin123',
-      obscureText: true,
-      decoration: InputDecoration(
-        hintText: 'Re-enter Password',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-    );
-
-    final signUpButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        onPressed: () {
-          Navigator.of(context).pushNamed(HomePage.route);
-        },
-        padding: EdgeInsets.all(12),
-        color: Colors.cyan,
-        child: Text(
-          'Sign Up',
-          style: TextStyle(
-            color: Colors.white,
-          ),
-        ),
-      ),
-    );
-
-    final forgotLabel = FlatButton(
+    final loginLabel = FlatButton(
       child: Text(
         'Already have an account? Sign in',
         style: TextStyle(
@@ -104,26 +57,127 @@ class _SignUpPageState extends State<SignUpPage> {
       },
     );
 
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            logo,
-            SizedBox(height: 48.0),
-            email,
-            SizedBox(height: 8.0),
-            password,
-            SizedBox(height: 8.0),
-            reEnterPassword,
-            SizedBox(height: 24.0),
-            signUpButton,
-            forgotLabel
-          ],
+    Widget _signupBody() {
+      return SafeArea(
+        child: Center(
+          child: Container(
+            padding: EdgeInsets.only(left: 24.0, right: 24.0),
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  logo,
+                  SizedBox(height: 32.0),
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    autofocus: false,
+                    initialValue: 'test@test.com',
+                    validator: (val) => val.isEmpty || val != 'test@test.com'
+                        ? 'Enter an email'
+                        : null,
+                    onChanged: (val) {
+                      setState(() {
+                        email = val;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Email',
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32.0)),
+                    ),
+                  ),
+                  SizedBox(height: 8.0),
+                  TextFormField(
+                    autofocus: false,
+                    initialValue: 'admin123',
+                    obscureText: _hidePassword,
+                    validator: (val) =>
+                        val != 'admin123' ? 'Enter valid password' : null,
+                    onChanged: (val) {
+                      setState(() {
+                        password = val;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: (_hidePassword)
+                            ? Icon(Icons.remove_red_eye_outlined)
+                            : Icon(Icons.remove_red_eye),
+                        onPressed: () {
+                          setState(() {
+                            _hidePassword = !_hidePassword;
+                          });
+                        },
+                      ),
+                      hintText: 'Password',
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32.0)),
+                    ),
+                  ),
+                  SizedBox(height: 8.0),
+                  TextFormField(
+                    autofocus: false,
+                    initialValue: 'admin123',
+                    obscureText: _hidePassword2,
+                    validator: (val) =>
+                        val != password ? 'Password does not match' : null,
+                    onChanged: (val) {
+                      setState(() {
+                        password2 = val;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: (_hidePassword2)
+                            ? Icon(Icons.remove_red_eye_outlined)
+                            : Icon(Icons.remove_red_eye),
+                        onPressed: () {
+                          setState(() {
+                            _hidePassword2 = !_hidePassword2;
+                          });
+                        },
+                      ),
+                      hintText: 'Re-enter password',
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32.0)),
+                    ),
+                  ),
+                  SizedBox(height: 24.0),
+                  SizedBox(
+                    height: 48,
+                    width: 450,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
+                          Navigator.of(context).pushNamed(HomePage.route);
+                        }
+                      },
+                      padding: EdgeInsets.all(12),
+                      color: Colors.cyan,
+                      child: Text('Register',
+                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                    ),
+                  ),
+                  // errorLabel,
+                  loginLabel,
+                ],
+              ),
+            ),
+          ),
         ),
-      ),
-    );
+      );
+    }
+
+    return Scaffold(backgroundColor: Colors.white, body: _signupBody());
   }
 }

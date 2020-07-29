@@ -12,8 +12,8 @@ class _LoginPageState extends State<LoginPage> {
   String email = '';
   String password = '';
   String error = '';
-  // final _emailKey = GlobalKey<FormState>();
-  // final _passwordKey = GlobalKey<FormState>();
+  final _formKey = GlobalKey<FormState>();
+  bool _hidePassword = true;
 
   @override
   Widget build(BuildContext context) {
@@ -43,73 +43,6 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
 
-    final emailField = TextFormField(
-      // key: _emailKey,
-      keyboardType: TextInputType.emailAddress,
-      autofocus: false,
-      // initialValue: 'test@test.com',
-      validator: (val) => val.isEmpty ? 'Enter an email' : null,
-      onChanged: (val) {
-        setState(() {
-          email = val;
-        });
-      },
-      decoration: InputDecoration(
-        hintText: 'Email',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-    );
-
-    final passwordField = TextFormField(
-      // key: _passwordKey,
-      autofocus: false,
-      // initialValue: 'admin123',
-
-      obscureText: true,
-      validator: (val) =>
-          val != 'admin123' ? 'Password does not match email' : null,
-      onChanged: (val) {
-        setState(() {
-          password = val;
-        });
-      },
-      decoration: InputDecoration(
-        hintText: 'Password',
-        contentPadding: EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-    );
-
-    final loginButton = Padding(
-      padding: EdgeInsets.symmetric(vertical: 16.0),
-      child: RaisedButton(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(24),
-        ),
-        onPressed: () {
-          if (password == 'admin123' && email == 'test@test.com') {
-            Navigator.of(context).pushNamed(HomePage.route);
-          } else {
-            setState(() {
-              error = 'Please enter valid credentials';
-            });
-          }
-        },
-        padding: EdgeInsets.all(12),
-        color: Colors.cyan,
-        child: Text('Log In', style: TextStyle(color: Colors.white)),
-      ),
-    );
-
-    final errorLabel = Text(
-      error,
-      style: TextStyle(
-        color: Colors.red,
-        fontSize: 14,
-      ),
-    );
-
     final forgotLabel = FlatButton(
       child: Text(
         'Forgot password?',
@@ -131,26 +64,101 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
 
+    Widget _loginBody() {
+      return SafeArea(
+        child: Center(
+          child: Container(
+            padding: EdgeInsets.only(left: 24.0, right: 24.0),
+            child: Form(
+              key: _formKey,
+              child: ListView(
+                shrinkWrap: true,
+                children: [
+                  logo,
+                  SizedBox(height: 32.0),
+                  TextFormField(
+                    keyboardType: TextInputType.emailAddress,
+                    autofocus: false,
+                    initialValue: 'test@test.com',
+                    validator: (val) => val.isEmpty || val != 'test@test.com'
+                        ? 'Enter an email'
+                        : null,
+                    onChanged: (val) {
+                      setState(() {
+                        email = val;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      hintText: 'Email',
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32.0)),
+                    ),
+                  ),
+                  SizedBox(height: 8.0),
+                  TextFormField(
+                    autofocus: false,
+                    initialValue: 'admin123',
+                    obscureText: _hidePassword,
+                    validator: (val) =>
+                        val != 'admin123' ? 'Enter valid password' : null,
+                    onChanged: (val) {
+                      setState(() {
+                        password = val;
+                      });
+                    },
+                    decoration: InputDecoration(
+                      suffixIcon: IconButton(
+                        icon: (_hidePassword)
+                            ? Icon(Icons.remove_red_eye_outlined)
+                            : Icon(Icons.remove_red_eye),
+                        onPressed: () {
+                          setState(() {
+                            _hidePassword = !_hidePassword;
+                          });
+                        },
+                      ),
+                      hintText: 'Password',
+                      contentPadding:
+                          EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+                      border: OutlineInputBorder(
+                          borderRadius: BorderRadius.circular(32.0)),
+                    ),
+                  ),
+                  SizedBox(height: 24.0),
+                  SizedBox(
+                    height: 48,
+                    width: 450,
+                    child: RaisedButton(
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(24),
+                      ),
+                      onPressed: () {
+                        if (_formKey.currentState.validate()) {
+                          Navigator.of(context).pushNamed(HomePage.route);
+                        }
+                      },
+                      padding: EdgeInsets.all(12),
+                      color: Colors.cyan,
+                      child: Text('Log In',
+                          style: TextStyle(color: Colors.white, fontSize: 20)),
+                    ),
+                  ),
+                  // errorLabel,
+                  signUpLabel,
+                  forgotLabel
+                ],
+              ),
+            ),
+          ),
+        ),
+      );
+    }
+
     return Scaffold(
       backgroundColor: Colors.white,
-      body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            logo,
-            SizedBox(height: 48.0),
-            emailField,
-            SizedBox(height: 8.0),
-            passwordField,
-            SizedBox(height: 24.0),
-            loginButton,
-            errorLabel,
-            signUpLabel,
-            forgotLabel
-          ],
-        ),
-      ),
+      body: _loginBody(),
     );
   }
 }
