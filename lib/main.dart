@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:study_habits/Pages/loginPage.dart';
+import 'package:study_habits/Pages/signupPage.dart';
 
 import 'Pages/homepage.dart';
 
@@ -12,7 +14,13 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: LoginPage(),
+      initialRoute: '/login',
+      routes: {
+        '/home': (context) => HomePage(),
+        '/login': (context) => LoginPage(),
+        '/sign-up': (context) => SignUpPage()
+      },
     );
   }
 }
