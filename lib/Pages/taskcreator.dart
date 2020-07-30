@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_habits/Pages/homepage.dart';
 import 'package:study_habits/constants/style.dart';
 
 import '../constants/my_icons_icons.dart';
@@ -43,6 +44,7 @@ class Task {
 }
 
 class _TaskCreatorPageState extends State<TaskCreatorPage> {
+  final _formKey = GlobalKey<FormState>();
   //for getting input
   final TextEditingController nameCtrl = TextEditingController();
   final TextEditingController descCtrl = TextEditingController();
@@ -95,23 +97,24 @@ class _TaskCreatorPageState extends State<TaskCreatorPage> {
         body: taskBody());
   }
 
-  Widget createTask(
-      String label, TextEditingController ctrl, bool numbersOnly) {
-    return new TextFormField(
-        validator: (value) {
-          value.isEmpty ? "Cannot leave field empty" : null;
-        },
-        controller: ctrl,
-        style: TextStyle(fontSize: 18),
-        keyboardType: (numbersOnly ? TextInputType.number : TextInputType.text),
-        decoration: InputDecoration(
-          enabledBorder: OutlineInputBorder(
-              borderSide: const BorderSide(color: Colors.green, width: 2.0),
-              borderRadius: BorderRadius.circular(20.0)),
-          contentPadding: EdgeInsets.symmetric(vertical: 35),
-          labelText: label,
-        ));
-  }
+  // Widget createTask(
+  //     String label, TextEditingController ctrl, bool numbersOnly) {
+  //   return new TextFormField(
+  //     validator: (value) {
+  //       value.isEmpty ? "Cannot leave field empty" : null;
+  //     },
+  //     controller: ctrl,
+  //     style: TextStyle(fontSize: 18),
+  //     keyboardType: (numbersOnly ? TextInputType.number : TextInputType.text),
+  //     decoration: InputDecoration(
+  //       enabledBorder: OutlineInputBorder(
+  //           borderSide: const BorderSide(color: Colors.green, width: 2.0),
+  //           borderRadius: BorderRadius.circular(20.0)),
+  //       contentPadding: EdgeInsets.symmetric(vertical: 35),
+  //       labelText: label,
+  //     ),
+  //   );
+  // }
 
   Widget taskBody() {
     return new Align(
@@ -123,38 +126,154 @@ class _TaskCreatorPageState extends State<TaskCreatorPage> {
             child: Text(
               'Create New Task',
               style: TextStyle(
-                fontFamily: 'Nunito',
+                fontFamily: 'Roboto',
                 fontWeight: FontWeight.w700,
                 fontSize: 40,
-                color: Colors.green,
+                color: Colors.blueGrey,
               ),
             ),
           ),
-          //Creating tasks using our widget
-          createTask("Enter Task Name", nameCtrl, false),
-          createTask("Enter Task Description", descCtrl, false),
-          createTask("Deadline in how many days?", dateCtrl, true),
-          FlatButton(
-            color: Colors.green,
-            textColor: Colors.white,
-            disabledColor: Colors.grey,
-            disabledTextColor: Colors.black,
-            padding: EdgeInsets.all(8.0),
-            splashColor: Colors.blueAccent,
-            onPressed: () {
-              //create new task
-              Task newTask = new Task(
-                  nameCtrl.text,
-                  descCtrl.text,
-                  DateTime.now()
-                      .add(new Duration(days: int.parse(dateCtrl.text))));
-              sendSavedTask(context, newTask);
-            },
-            child: Text(
-              "Save Task",
-              style: TextStyle(fontSize: 20.0),
+          Form(
+            key: _formKey,
+            child: ListView(
+              shrinkWrap: true,
+              children: [
+                SizedBox(height: 8),
+                SizedBox(
+                  height: 48,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: TextFormField(
+                      validator: (value) {
+                        value.isEmpty ? "Cannot leave field empty" : null;
+                      },
+                      controller: nameCtrl,
+                      style: TextStyle(fontSize: 18),
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.green, width: 2.0),
+                            borderRadius: BorderRadius.circular(20.0)),
+                        contentPadding: EdgeInsets.only(left: 20),
+                        labelText: "Enter task name",
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                SizedBox(
+                  height: 48,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: TextFormField(
+                      validator: (value) {
+                        value.isEmpty ? "Cannot leave field empty" : null;
+                      },
+                      controller: descCtrl,
+                      style: TextStyle(fontSize: 18),
+                      keyboardType: TextInputType.text,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.green, width: 2.0),
+                            borderRadius: BorderRadius.circular(20.0)),
+                        contentPadding: EdgeInsets.only(left: 20),
+                        labelText: "Enter task description",
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 8),
+                SizedBox(
+                  height: 48,
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 16, right: 16),
+                    child: TextFormField(
+                      validator: (value) {
+                        value.isEmpty ? "Cannot leave field empty" : null;
+                      },
+                      controller: dateCtrl,
+                      style: TextStyle(fontSize: 18),
+                      keyboardType: TextInputType.number,
+                      decoration: InputDecoration(
+                        enabledBorder: OutlineInputBorder(
+                            borderSide: const BorderSide(
+                                color: Colors.green, width: 2.0),
+                            borderRadius: BorderRadius.circular(20.0)),
+                        contentPadding: EdgeInsets.only(left: 20),
+                        labelText: "Deadline in how many days? ",
+                      ),
+                    ),
+                  ),
+                ),
+                SizedBox(height: 16),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: 48,
+                      width: 160,
+                      child: FlatButton(
+                        color: Colors.green,
+                        textColor: Colors.white,
+                        disabledColor: Colors.grey,
+                        disabledTextColor: Colors.black,
+                        padding: EdgeInsets.all(8.0),
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(24),
+                        ),
+                        // splashColor: Colors.blueAccent,
+                        onPressed: () {
+                          //create new task
+                          if (_formKey.currentState.validate()) {
+                            Task newTask = new Task(
+                                nameCtrl.text,
+                                descCtrl.text,
+                                DateTime.now().add(new Duration(
+                                    days: int.parse(dateCtrl.text))));
+                            sendSavedTask(context, newTask);
+                          }
+                        },
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          children: [
+                            Icon(Icons.save),
+                            Text(
+                              'Save Task',
+                              style: TextStyle(fontSize: 16),
+                            )
+                          ],
+                        ),
+                      ),
+                    ),
+                    FlatButton(
+                      color: Colors.red,
+                      textColor: Colors.white,
+                      disabledColor: Colors.grey,
+                      disabledTextColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(5),
+                      ),
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      child: Text(
+                        'Cancel',
+                        style: TextStyle(fontSize: 16),
+                      ),
+                    ),
+                  ],
+                ),
+              ],
             ),
-          )
+          ),
+
+          //Creating tasks using our widget
+          // createTask("Enter Task Name", nameCtrl, false),
+          // createTask("Enter Task Description", descCtrl, false),
+          // createTask("Deadline in how many days?", dateCtrl, true),
         ],
       ),
     );

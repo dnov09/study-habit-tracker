@@ -74,7 +74,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     autofocus: false,
                     initialValue: 'test@test.com',
                     validator: (val) => val.isEmpty || val != 'test@test.com'
-                        ? 'Enter an email'
+                        ? 'Enter a valid email'
                         : null,
                     onChanged: (val) {
                       setState(() {

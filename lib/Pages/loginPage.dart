@@ -81,7 +81,7 @@ class _LoginPageState extends State<LoginPage> {
                     autofocus: false,
                     initialValue: 'test@test.com',
                     validator: (val) => val.isEmpty || val != 'test@test.com'
-                        ? 'Enter an email'
+                        ? 'Enter a valid email'
                         : null,
                     onChanged: (val) {
                       setState(() {
@@ -145,7 +145,6 @@ class _LoginPageState extends State<LoginPage> {
                           style: TextStyle(color: Colors.white, fontSize: 20)),
                     ),
                   ),
-                  // errorLabel,
                   signUpLabel,
                   forgotLabel
                 ],
