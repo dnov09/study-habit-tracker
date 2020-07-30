@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_habits/Pages/completedTaskPage.dart';
 import 'package:study_habits/Pages/loginPage.dart';
 import 'package:study_habits/Pages/signupPage.dart';
 
@@ -19,7 +20,8 @@ class MyApp extends StatelessWidget {
       routes: {
         '/home': (context) => HomePage(),
         '/login': (context) => LoginPage(),
-        '/sign-up': (context) => SignUpPage()
+        '/sign-up': (context) => SignUpPage(),
+        '/completed': (context) => CompletedTaskPage()
       },
     );
   }

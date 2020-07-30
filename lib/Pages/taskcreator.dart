@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:study_habits/Pages/homepage.dart';
 import 'package:study_habits/constants/style.dart';
+import 'package:study_habits/widgets/appBar.dart';
 
 import '../constants/my_icons_icons.dart';
 
@@ -52,49 +53,7 @@ class _TaskCreatorPageState extends State<TaskCreatorPage> {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          leading: Icon(
-            Icons.menu,
-            color: Colors.black,
-          ),
-          backgroundColor: Colors.white,
-          centerTitle: true,
-          elevation: 2.0,
-          title: const Text.rich(
-            TextSpan(
-              children: <TextSpan>[
-                TextSpan(
-                    text: 'Task',
-                    style: TextStyle(
-                      fontSize: 24,
-                      fontFamily: 'Roboto',
-                      color: Colors.black,
-                    )),
-                TextSpan(
-                  text: 'It',
-                  style: TextStyle(
-                    fontSize: 24,
-                    fontFamily: 'Roboto',
-                    fontWeight: FontWeight.w700,
-                    color: Colors.cyan,
-                  ),
-                ),
-              ],
-            ),
-          ),
-          actions: <Widget>[
-            IconButton(
-              icon: Icon(
-                MyIcons.calendar_check,
-                // size: 32,
-              ),
-              color: Colors.black,
-              onPressed: () {},
-            )
-          ],
-        ),
-        body: taskBody());
+    return Scaffold(appBar: MyAppBar(), body: taskBody());
   }
 
   // Widget createTask(
