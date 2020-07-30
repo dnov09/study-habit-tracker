@@ -257,7 +257,7 @@ class _TaskCreatorPageState extends State<TaskCreatorPage> {
                         borderRadius: BorderRadius.circular(5),
                       ),
                       onPressed: () {
-                        Navigator.pop(context);
+                        Navigator.pop(context, null);
                       },
                       child: Text(
                         'Cancel',

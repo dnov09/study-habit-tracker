@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:study_habits/constants/style.dart';
 import 'package:study_habits/Pages/taskcreator.dart';
+import 'package:study_habits/Pages/effortPage.dart';
 import '../constants/my_icons_icons.dart';
 
 class HomePage extends StatefulWidget {
@@ -84,27 +85,39 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget _buildList() {
+
     return new ListView.builder(
         padding: const EdgeInsets.all(16.0),
         itemCount: taskList.length,
         itemBuilder: (context, key) {
-          return new CheckboxListTile(
-            title: Text(taskList[key].title, style: TextStyle(fontSize: 18.0)),
-            value: values[key],
-            onChanged: (bool newValue) {
-              setState(
-                () {
-                  values[key] = newValue;
-                  if (newValue) {
-                    // taskList.removeAt(key);
-                    // values.removeAt(key);
-                  }
-                },
-              );
-            },
-          ); //On changed
-        });
-  } //widget build list
+          return new GestureDetector(
+              child: CheckboxListTile(
+                  title: Text(taskList[key].title, style: TextStyle(fontSize: 18.0)),
+                  value: values[key],
+
+                  onChanged: (bool newValue) {
+                    setState(
+                      () {
+                        values[key] = newValue;
+                        if (newValue) {
+                          // taskList.removeAt(key);
+                          // values.removeAt(key);
+                        }
+                      },
+                    );
+                  },
+            ),
+            onLongPress: () {
+              Navigator.of(context).push(
+                  MaterialPageRoute(
+                      builder:(context)=>EffortPage(taskList[key])
+                  ));
+            }
+            ); //On changed
+          });
+
+
+  }
 
   void awaitReturnTaskFromCreator(BuildContext context) async {
     // start taskcreator and wait for the task to be saved
@@ -116,7 +129,9 @@ class _HomePageState extends State<HomePage> {
 
     // add to this list
     setState(() {
-      taskList.add(resultGotten);
+      if (!(resultGotten == null)) {
+        taskList.add(resultGotten);
+      }
     });
   }
 }
