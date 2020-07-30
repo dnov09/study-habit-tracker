@@ -111,7 +111,7 @@ class _LoginPageState extends State<LoginPage> {
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         icon: (_hidePassword)
-                            ? Icon(Icons.remove_red_eye_outlined)
+                            ? Icon(Icons.remove_red_eye)
                             : Icon(Icons.remove_red_eye),
                         onPressed: () {
                           setState(() {

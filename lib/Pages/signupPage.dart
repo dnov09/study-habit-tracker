@@ -104,7 +104,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         icon: (_hidePassword)
-                            ? Icon(Icons.remove_red_eye_outlined)
+                            ? Icon(Icons.remove_red_eye) //remove_red_eye outline doesnt exist for me, changing for now
                             : Icon(Icons.remove_red_eye),
                         onPressed: () {
                           setState(() {
@@ -134,7 +134,7 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         icon: (_hidePassword2)
-                            ? Icon(Icons.remove_red_eye_outlined)
+                            ? Icon(Icons.remove_red_eye)
                             : Icon(Icons.remove_red_eye),
                         onPressed: () {
                           setState(() {
