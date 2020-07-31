@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:study_habits/Pages/taskDetailsPage.dart';
 import 'package:study_habits/constants/style.dart';
 import 'package:study_habits/Pages/taskcreator.dart';
 import 'package:study_habits/widgets/appBar.dart';
@@ -70,7 +71,8 @@ class _HomePageState extends State<HomePage> {
               ),
               onLongPress: () {
                 Navigator.of(context).push(MaterialPageRoute(
-                    builder: (context) => EffortPage(taskList[key])));
+                    builder: (context) =>
+                        TaskDetails(taskGotten: taskList[key])));
               }); //On changed
         });
   }

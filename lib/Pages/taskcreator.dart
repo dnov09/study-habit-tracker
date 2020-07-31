@@ -166,7 +166,7 @@ class _TaskCreatorPageState extends State<TaskCreatorPage> {
                     ),
                   ),
                 ),
-                SizedBox(height: 16),
+                SizedBox(height: 24),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   crossAxisAlignment: CrossAxisAlignment.center,

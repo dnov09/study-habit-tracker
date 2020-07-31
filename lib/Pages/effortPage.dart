@@ -3,27 +3,15 @@ import 'package:study_habits/constants/style.dart';
 import 'package:study_habits/Pages/taskcreator.dart';
 import '../constants/my_icons_icons.dart';
 
-
 class EffortPage extends StatefulWidget {
-
-  Task taskGotten;
+  final Task taskGotten;
   EffortPage(this.taskGotten);
 
   @override
-  EffortPageState createState() => EffortPageState(this.taskGotten);
-
-
+  EffortPageState createState() => EffortPageState();
 }
 
-
-
-
 class EffortPageState extends State<EffortPage> {
-
-  Task taskGotten;
-  EffortPageState(this.taskGotten);
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -68,37 +56,20 @@ class EffortPageState extends State<EffortPage> {
             )
           ],
         ),
-
         body: effortView());
   }
 
-
   Widget effortView() {
     return new Align(
-      alignment: Alignment.center,
-      child: ListView.builder(
-        padding: const EdgeInsets.all(8),
-        itemCount: taskGotten.efforts.length,
-        itemBuilder: (context, key) {
-          return new ListTile(
-            title: Text(taskGotten.efforts[key].description, style: TextStyle(fontSize: 16.0))
-          );
-        }
-
-
-
-
-      )
-
-
-
-    );
+        alignment: Alignment.center,
+        child: ListView.builder(
+            padding: const EdgeInsets.all(8),
+            itemCount: widget.taskGotten.efforts.length,
+            itemBuilder: (context, key) {
+              return new ListTile(
+                  title: Text(widget.taskGotten.efforts[key].description,
+                      style: TextStyle(fontSize: 16.0)));
+            }));
   } //widget build list
 
-
-
-
-
 }
-
-

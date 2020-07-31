@@ -82,7 +82,7 @@ flutter:
           weight: 500
           style: italic
 
-    - family: Open Sans
+    - family: OpenSans
       fonts:
         - asset: fonts/OpenSans-Bold.ttf
           weight: 700
