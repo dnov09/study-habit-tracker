@@ -3,6 +3,7 @@ import 'package:study_habits/Pages/completedTaskPage.dart';
 import 'package:study_habits/Pages/loginPage.dart';
 import 'package:study_habits/Pages/signupPage.dart';
 
+import 'models/completedTask.dart';
 import 'Pages/homepage.dart';
 
 void main() {
@@ -22,6 +23,7 @@ class MyApp extends StatelessWidget {
         '/login': (context) => LoginPage(),
         '/sign-up': (context) => SignUpPage(),
         '/completed': (context) => CompletedTaskPage()
+        // '/completed': (context) => CompletedPage()
       },
     );
   }

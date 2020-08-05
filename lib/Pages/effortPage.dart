@@ -61,15 +61,17 @@ class EffortPageState extends State<EffortPage> {
 
   Widget effortView() {
     return new Align(
-        alignment: Alignment.center,
-        child: ListView.builder(
-            padding: const EdgeInsets.all(8),
-            itemCount: widget.taskGotten.efforts.length,
-            itemBuilder: (context, key) {
-              return new ListTile(
-                  title: Text(widget.taskGotten.efforts[key].description,
-                      style: TextStyle(fontSize: 16.0)));
-            }));
+      alignment: Alignment.center,
+      child: ListView.builder(
+        padding: const EdgeInsets.all(8),
+        itemCount: widget.taskGotten.efforts.length,
+        itemBuilder: (context, key) {
+          return new ListTile(
+              title: Text(widget.taskGotten.efforts[key].description,
+                  style: TextStyle(fontSize: 16.0)));
+        },
+      ),
+    );
   } //widget build list
 
 }

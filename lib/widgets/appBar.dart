@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:study_habits/models/completedTask.dart';
 import 'package:study_habits/Pages/completedTaskPage.dart';
 import 'package:study_habits/constants/my_icons_icons.dart';
-import 'package:study_habits/main.dart';
 
 class MyAppBar extends PreferredSize {
   final double elevation;

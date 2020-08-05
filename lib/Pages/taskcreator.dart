@@ -56,25 +56,6 @@ class _TaskCreatorPageState extends State<TaskCreatorPage> {
     return Scaffold(appBar: MyAppBar(), body: taskBody());
   }
 
-  // Widget createTask(
-  //     String label, TextEditingController ctrl, bool numbersOnly) {
-  //   return new TextFormField(
-  //     validator: (value) {
-  //       value.isEmpty ? "Cannot leave field empty" : null;
-  //     },
-  //     controller: ctrl,
-  //     style: TextStyle(fontSize: 18),
-  //     keyboardType: (numbersOnly ? TextInputType.number : TextInputType.text),
-  //     decoration: InputDecoration(
-  //       enabledBorder: OutlineInputBorder(
-  //           borderSide: const BorderSide(color: Colors.green, width: 2.0),
-  //           borderRadius: BorderRadius.circular(20.0)),
-  //       contentPadding: EdgeInsets.symmetric(vertical: 35),
-  //       labelText: label,
-  //     ),
-  //   );
-  // }
-
   Widget taskBody() {
     return new Align(
       alignment: Alignment.center,
@@ -94,6 +75,7 @@ class _TaskCreatorPageState extends State<TaskCreatorPage> {
           ),
           Form(
             key: _formKey,
+            autovalidate: true,
             child: ListView(
               shrinkWrap: true,
               children: [
@@ -193,6 +175,8 @@ class _TaskCreatorPageState extends State<TaskCreatorPage> {
                                 DateTime.now().add(new Duration(
                                     days: int.parse(dateCtrl.text))));
                             sendSavedTask(context, newTask);
+                            WidgetsBinding.instance
+                                .addPostFrameCallback((_) => dateCtrl.clear());
                           }
                         },
                         child: Row(

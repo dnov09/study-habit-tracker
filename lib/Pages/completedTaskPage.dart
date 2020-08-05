@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:study_habits/Pages/taskcreator.dart';
 import 'package:study_habits/widgets/appBar.dart';
 import 'package:study_habits/constants/my_icons_icons.dart';
 import 'package:study_habits/constants/style.dart';
 
 class CompletedTaskPage extends StatefulWidget {
   static String route = '/completed';
-  List<String> complete = ["Finish CS 487 final paper", "Task 123", "Task 345"];
+  // final String title;
+  // final bool completed;
+  final List<Task> completedTasks;
 
-  CompletedTaskPage({Key key, this.complete}) : super(key: key);
+  CompletedTaskPage({Key key, this.completedTasks}) : super(key: key);
+
   @override
   _CompletedTaskPageState createState() => _CompletedTaskPageState();
 }
@@ -19,6 +23,7 @@ class _CompletedTaskPageState extends State<CompletedTaskPage> {
     "Task 345"
   ];
   bool checked = true;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -49,7 +54,7 @@ class _CompletedTaskPageState extends State<CompletedTaskPage> {
             return Padding(
               padding: const EdgeInsets.only(left: 16.0, right: 16),
               child: CheckboxListTile(
-                value: checked,
+                value: true,
                 title: Text(
                   completedTasks[idx],
                   style: TextStyle(

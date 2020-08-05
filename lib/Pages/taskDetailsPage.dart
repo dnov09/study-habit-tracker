@@ -4,6 +4,7 @@ import 'package:study_habits/constants/style.dart';
 import 'package:study_habits/Pages/taskcreator.dart';
 import 'package:study_habits/widgets/appBar.dart';
 import '../constants/my_icons_icons.dart';
+import '../models/completedTask.dart';
 
 class TaskDetails extends StatefulWidget {
   final Task taskGotten;
@@ -16,6 +17,7 @@ class TaskDetails extends StatefulWidget {
 class TaskDetailsState extends State<TaskDetails> {
   // Effort effort;
   List<int> efforts = [];
+  // CompletedPage finished;
   var duration = 0;
   final timeCtrl = TextEditingController();
   final _formKey = GlobalKey<FormState>();
@@ -192,7 +194,8 @@ class TaskDetailsState extends State<TaskDetails> {
                   ),
                   // splashColor: Colors.blueAccent,
                   onPressed: () {
-                    //create new task
+                    //navigate to completed task but doesnt do anything
+                    // finished.completedTasks.add(widget.taskGotten.title);
                     Navigator.popAndPushNamed(context, CompletedTaskPage.route);
                   },
                   child: Row(
