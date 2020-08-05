@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:study_habits/Pages/homepage.dart';
-import 'package:study_habits/Pages/signupPage.dart';
+import 'package:study_habits/pages/homepage.dart';
+import 'package:study_habits/pages/signupPage.dart';
 
 class LoginPage extends StatefulWidget {
   static String route = '/login';

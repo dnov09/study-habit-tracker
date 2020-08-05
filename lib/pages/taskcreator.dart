@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:study_habits/Pages/homepage.dart';
+import 'package:study_habits/pages/homepage.dart';
 import 'package:study_habits/constants/style.dart';
 import 'package:study_habits/widgets/appBar.dart';
 

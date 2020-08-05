@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:study_habits/Pages/taskDetailsPage.dart';
+import 'package:study_habits/pages/taskDetailsPage.dart';
 import 'package:study_habits/constants/style.dart';
-import 'package:study_habits/Pages/taskcreator.dart';
+import 'package:study_habits/pages/taskcreator.dart';
 import 'package:study_habits/widgets/appBar.dart';
-import 'package:study_habits/Pages/effortPage.dart';
+import 'package:study_habits/pages/effortPage.dart';
 import '../constants/my_icons_icons.dart';
 
 class HomePage extends StatefulWidget {

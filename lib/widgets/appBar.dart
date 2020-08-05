@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:study_habits/models/completedTask.dart';
-import 'package:study_habits/Pages/completedTaskPage.dart';
+import 'package:study_habits/pages/completedTaskPage.dart';
 import 'package:study_habits/constants/my_icons_icons.dart';
 
 class MyAppBar extends PreferredSize {

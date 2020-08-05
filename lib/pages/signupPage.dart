@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:study_habits/Pages/homepage.dart';
-import 'package:study_habits/Pages/loginPage.dart';
+import 'package:study_habits/pages/homepage.dart';
+import 'package:study_habits/pages/loginPage.dart';
 
 class SignUpPage extends StatefulWidget {
   static String route = '/sign-up';
@@ -104,7 +104,8 @@ class _SignUpPageState extends State<SignUpPage> {
                     decoration: InputDecoration(
                       suffixIcon: IconButton(
                         icon: (_hidePassword)
-                            ? Icon(Icons.remove_red_eye) //remove_red_eye outline doesnt exist for me, changing for now
+                            ? Icon(Icons
+                                .remove_red_eye) //remove_red_eye outline doesnt exist for me, changing for now
                             : Icon(Icons.remove_red_eye),
                         onPressed: () {
                           setState(() {

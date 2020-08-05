@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:study_habits/constants/style.dart';
-import 'package:study_habits/Pages/taskcreator.dart';
+import 'package:study_habits/pages/taskcreator.dart';
 import '../constants/my_icons_icons.dart';
 
 class EffortPage extends StatefulWidget {

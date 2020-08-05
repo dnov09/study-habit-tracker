@@ -1,11 +1,23 @@
 import 'dart:ui';
 
-import 'package:study_habits/Pages/taskcreator.dart';
+import 'package:flutter/widgets.dart';
+import 'package:study_habits/pages/taskcreator.dart';
 
-class Completed {
-  Task task;
+class Completed with ChangeNotifier {
+  List<String> tasks;
 
-  void removeTask() {}
+  // void removeTask(Task task) {
+  //   tasks.remove(task.title);
+  // }
 
-  void addTask() {}
+  void addTask(Task task) {
+    tasks.add(task.title);
+
+    notifyListeners();
+  }
+
+  void clearCompleted() {
+    tasks = [];
+    notifyListeners();
+  }
 }

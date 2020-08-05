@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:study_habits/Pages/completedTaskPage.dart';
+import 'package:study_habits/pages/completedTaskPage.dart';
 import 'package:study_habits/constants/style.dart';
-import 'package:study_habits/Pages/taskcreator.dart';
+import 'package:study_habits/pages/taskcreator.dart';
 import 'package:study_habits/widgets/appBar.dart';
 import '../constants/my_icons_icons.dart';
 import '../models/completedTask.dart';
